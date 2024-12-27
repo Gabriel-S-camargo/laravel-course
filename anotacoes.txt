@@ -59,3 +59,23 @@ Route::controller(Calculate::class)->group(function () {
     Route::get('/sum/{number1}/{number2}', 'sum');
     Route::get('/subtract/{number1}/{number2}', 'subtract');
 });
+
+Blade Directives
+
+-> São palavras chaves que possuem como prefixo o '@' usando no blade para simplificar tarefas, como iteração de dados
+Além de ajudar a capacidade de manutenção e leitura do Código
+
+-> Com isso o Blade ajuda a ter um Código mais dinamico na View pois ele otimiza o HTML com o PHP
+
+
+-> Comandos do Blade directives 
+
+-Comentario : {{-- Comentario --}}
+
+-Condicionais:
+    - @if (true)
+        dump('Display do If')
+      @endif
+
+-> Basicamente o Blade é como se fosse uma pseudolinguagem que voce pode colocar logica no display de partes de HTML a partir do valor e condições colocadas no Blade, ele precisa do @ para saber que sera executado uma diretiva Blade para que possa executar regras de negócio com o Blade, tornando o Display de dados e informações em tela mais dinamico, de modo que voce possa colocar lógica direto com o HTML de maneira dinamica.
+

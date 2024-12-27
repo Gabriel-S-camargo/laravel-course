@@ -1,15 +1,9 @@
 <?php
 
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    // Agora 'about' refere-se a uma rota nomeada.
-    $aboutPageUrl = route('about');
-
-    dd($aboutPageUrl);
-
-    return view('welcome');
-});
-
+Route::get('/', [HomeController::class, 'index'])->name('home');
 // Nomeando a rota '/about'
 Route::view('/about', 'about')->name('about');
