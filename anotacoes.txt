@@ -1,0 +1,61 @@
+// Aqui nessa rota ela apenas será direcionada à página quando o id for um número, senão ela dá 404
+Route::get('/product/{id}', function(string $id){
+    return "works! $id";
+})->whereNumber('id');
+
+// Aqui nessa rota tem dois parâmetros que irão ser usados no where
+Route::get('{lang}/product/{id}', function(string $lang, string $id){
+    // ...
+})->where(['lang' => '[a-z]{2}', 'id' => '\d{4,}']);
+// Aqui o where está falando que a variável $lang pode ser de A a Z com até 2 caracteres e a variável $id pode conter apenas dígitos (\d), com no mínimo 4 dígitos ou mais
+
+// Aqui nessa rota é para retornar o que foi pesquisado
+Route::get('/search/{search}', function(string $search){
+    return $search;
+})->where("search", '.+');
+// Nessa expressão regex, o `.` permite que contenha qualquer caracter, incluindo especiais como barras 
+
+// Aqui vamos mostrar como fazer redirect de uma rota para outra
+Route::get('user/profile', function(){})->name('profile');
+
+// Quando eu acessar a rota /current-user, a URL será redirecionada imediatamente para a /user/profile
+Route::get('/current-user', function(){
+    return to_route('profile');
+});
+
+// Aqui vamos definir as rotas em grupos, todas as rotas devem ter um prefixo de 'admin' + a rota
+Route::prefix('admin')->group(function(){
+    Route::get('/users', function(){
+        return '/admin/users';
+    });
+});
+
+// Aqui também é uma definição de grupo, mas apenas o nome da rota que levará o prefixo admin
+Route::name('admin.')->group(function(){
+    Route::get('/users', function(){
+        return '/users'; // Aqui vai ter a rota de /users, mas o nome da rota será admin.users
+    })->name('users');
+});
+
+// Essa é a rota fallback, que será acionada se nenhuma outra rota for encontrada
+Route::fallback(function(){
+    return 'FallBack';
+});
+
+// Essa rota calcula a soma de dois números, que são obrigatoriamente números reais
+Route::get('/calculate/{number1}/{number2}', function(float $number1, float $number2){
+    $result = $number1 + $number2;
+    return "Sum: $result";
+})->whereNumber(['number1', 'number2']);
+
+// Rotas associadas aos controllers ProductController e CarController, com suporte a operações CRUD apenas para APIs
+Route::apiResources([
+    'cars' => CarController::class,
+    'products' => ProductController::class
+]);
+
+// Aqui o Controller Calculate está agrupando duas rotas relacionadas a cálculos
+Route::controller(Calculate::class)->group(function () {
+    Route::get('/sum/{number1}/{number2}', 'sum');
+    Route::get('/subtract/{number1}/{number2}', 'subtract');
+});
