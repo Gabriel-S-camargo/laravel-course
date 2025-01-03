@@ -1,9 +1,4 @@
-@extends('layouts.app')
-
-@section('title', 'Home Page')
-
-@section('content')
-
+<x-app-layout>
     <!-- Home Slider -->
     <section class="hero-slider">
         <!-- Carousel wrapper -->
@@ -75,7 +70,7 @@
 
     <main>
 
-        <x-search-form/>
+        <x-search-form />
         <!-- New Cars -->
         <section>
             <div class="container">
@@ -467,5 +462,4 @@
         <a href="#">Link 3</a>
         <a href="#">Link 4</a>
     @endsection
-
-@endsection
+</x-app-layout>
