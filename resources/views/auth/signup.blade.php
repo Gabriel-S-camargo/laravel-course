@@ -1,7 +1,6 @@
-@extends('layouts.clean', ['cssClass' => 'page-signup'])
+<x-base-layout title="Sign Up" bodyClass='page-sigup'>
 
-@section('title', 'Signup')
-@section('childContent')
+</x-base-layout>
 
     <main>
         <div class="container-small page-login">
