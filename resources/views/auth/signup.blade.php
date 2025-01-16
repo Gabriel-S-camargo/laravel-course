@@ -1,4 +1,4 @@
-<x-base-layout title="Sign Up" bodyClass='page-sigup'>
+<x-base-layout title="Sign Up" bodyClass='page-signup'>
 
 </x-base-layout>
 
